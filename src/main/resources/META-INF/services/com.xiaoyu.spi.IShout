@@ -1,2 +1,6 @@
 com.xiaoyu.spi.Cat
 com.xiaoyu.spi.Dog
+
+console=com.xiaoyu.chain.ConsoleLogger
+file=com.xiaoyu.chain.FileLogger
+error=com.xiaoyu.chain.ErrorLogger

@@ -10,14 +10,20 @@ public class DubboSpiMain {
     public static void main(String[] args) {
         ExtensionLoader<IShout> extensionLoader =
                 ExtensionLoader.getExtensionLoader(IShout.class);
-        IShout cat = extensionLoader.getExtension("cat");
-        IShout dog = extensionLoader.getExtension("dog");
 
-        cat.shout();
-        dog.shout();
-        cat.shout();
-        cat.shout();
-        dog.shout();
-        dog.shout();
+        for (String name : extensionLoader.getSupportedExtensions()) {
+            IShout iShout = extensionLoader.getExtension(name);
+            iShout.shout();
+        }
+//        IShout cat = extensionLoader.getExtension("cat");
+//        IShout dog = extensionLoader.getExtension("dog");
+//
+//
+//        cat.shout();
+//        dog.shout();
+//        cat.shout();
+//        cat.shout();
+//        dog.shout();
+//        dog.shout();
     }
 }
