@@ -7,17 +7,17 @@ import com.alibaba.dubbo.common.extension.ExtensionLoader;
  * @date 2020/1/3 3:43 PM
  */
 public class ChainDemo {
-//    private static AbstractLogger getChainOfLoggers() {
-//
-//        AbstractLogger errorLogger = new ErrorLogger(AbstractLogger.ERROR);
-//        AbstractLogger fileLogger = new FileLogger(AbstractLogger.DEBUG);
-//        AbstractLogger consoleLogger = new ConsoleLogger(AbstractLogger.INFO);
-//
-//        errorLogger.setNextLogger(fileLogger);
-//        fileLogger.setNextLogger(consoleLogger);
-//
-//        return errorLogger;
-//    }
+    private static AbstractLogger getChainOfLoggers() {
+
+        AbstractLogger errorLogger = new ErrorLogger();
+        AbstractLogger fileLogger = new FileLogger();
+        AbstractLogger consoleLogger = new ConsoleLogger();
+
+        errorLogger.linkNextLogger(fileLogger);
+        fileLogger.linkNextLogger(consoleLogger);
+
+        return errorLogger;
+    }
 
 
     private static ChainLogger getSpiChainOfLoggers() {
@@ -38,10 +38,10 @@ public class ChainDemo {
     }
 
     public static void main(String[] args) {
-//        AbstractLogger loggerChain = getChainOfLoggers();
-//        loggerChain.logMessage(AbstractLogger.INFO, "This is an information.");
-//        loggerChain.logMessage(AbstractLogger.DEBUG, "This is a debug level information.");
-//        loggerChain.logMessage(AbstractLogger.ERROR, "This is an error information.");
+        AbstractLogger loggerChain = getChainOfLoggers();
+        loggerChain.logMessage(AbstractLogger.INFO, "This is an information.");
+        loggerChain.logMessage(AbstractLogger.DEBUG, "This is a debug level information.");
+        loggerChain.logMessage(AbstractLogger.ERROR, "This is an error information.");
 
         ChainLogger logger = getSpiChainOfLoggers();
         if (logger != null) {
